@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext2 } from '../proveders/AuthProvider2';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import auth from '../../../firebase/firebase.config';
 
 const Register = () => {
     const { createUser } = useContext(AuthContext2)
@@ -15,9 +13,13 @@ const Register = () => {
         // console.log(name, email, password);
 
         // create user in firebase
-        // createUser(email, password)
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(result => console.log(result))
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
 
 
